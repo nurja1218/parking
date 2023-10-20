@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { connectionOptions } from './config';
 import { ConfigModule } from '@nestjs/config';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { ParkingModule } from './domains/parking/parking.module';
+import { ParkingModule } from './modules/parking/parking.module';
 
 @Module({
   imports: [

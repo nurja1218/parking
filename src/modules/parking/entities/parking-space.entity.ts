@@ -6,27 +6,29 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  OneToMany,
+  ManyToOne,
 } from 'typeorm';
+import { ParkingLot } from './parking-lot.entity';
 import { Vehicle } from './vehicle.entity';
-import { ParkingFee } from './parking-fee.entity';
 
 @Entity()
-export class VehicleType extends BaseEntity {
+export class ParkingSpace extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  typeName: string;
+  number: string;
 
   @Column()
-  description: string;
+  isOccupied: boolean;
 
-  @OneToMany(() => Vehicle, (vehicle) => vehicle.vehicleType)
-  vehicles: Vehicle[];
+  @ManyToOne(() => ParkingLot, (lot) => lot.spaces)
+  parkingLot: ParkingLot;
 
-  @OneToMany(() => ParkingFee, (fee) => fee.vehicleType)
-  fees: ParkingFee[];
+  @ManyToOne(() => Vehicle, (vehicle) => vehicle.space, {
+    nullable: true,
+  })
+  vehicle?: Vehicle;
 
   @CreateDateColumn({
     type: 'timestamp',
