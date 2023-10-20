@@ -1,73 +1,102 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+\# 주차장 관리 API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+이 문서는 주차장 관리 API에 대한 설명을 제공합니다. 이 API는 NestJS와 TypeORM을 활용하여 개발되었습니다.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+\## 목차
 
-## Description
+1. [설치 및 실행 방법](#설치-및-실행-방법)
+2. [주요 기능](#주요-기능)
+3. [API Endpoints](#api-endpoints)
+4. [에러 처리](#에러-처리)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+\## 설치 및 실행 방법
 
-## Installation
+### 프로젝트 클론하기
 
-```bash
-$ npm install
-```
+\```bash
+git clone [Your-Repository-URL]
+\```
 
-## Running the app
+### 의존성 설치하기
 
-```bash
-# development
-$ npm run start
+\```bash
+cd [Your-Project-Directory]
+npm install
+\```
 
-# watch mode
-$ npm run start:dev
+### 환경 설정 파일 수정하기
 
-# production mode
-$ npm run start:prod
-```
+환경 설정 파일(\`.env\` 또는 \`environment.ts\` 등)을 수정하여 데이터베이스 연결과 관련된 설정들을 완료합니다.
 
-## Test
+### 프로젝트 실행하기
 
-```bash
-# unit tests
-$ npm run test
+\```bash
+npm run start
+\```
 
-# e2e tests
-$ npm run test:e2e
+\## 주요 기능
 
-# test coverage
-$ npm run test:cov
-```
+- **주차장 조회**: 등록된 모든 주차장의 정보를 조회합니다.
+- **주차장 상세 조회**: 주차장의 ID를 통해 특정 주차장의 상세 정보를 조회합니다.
+- **주차장 생성**: 새로운 주차장을 생성합니다.
 
-## Support
+\## API Endpoints
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **GET** \`/v1/parking\`: 모든 주차장 정보 조회
+- **GET** \`/v1/parking/:id\`: 특정 주차장 상세 정보 조회
+- **POST** \`/v1/parking\`: 주차장 생성
 
-## Stay in touch
+\## 응답 예시
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 주차장 조회 (GET \`/v1/parking\`)
 
-## License
+\```json
+[
+{
+"id": "1",
+"name": "주차장1",
+"location": "서울시 강남구",
+"totalSpaces": 100,
+"availableSpaces": 80
+},
+...
+]
+\```
 
-Nest is [MIT licensed](LICENSE).
+### 주차장 상세 조회 (GET \`/v1/parking/:id\`)
+
+\```json
+{
+"id": "1",
+"name": "주차장1",
+"location": "서울시 강남구",
+"totalSpaces": 100,
+"availableSpaces": 80
+}
+\```
+
+### 주차장 생성 (POST \`/v1/parking\`)
+
+요청 본문:
+\```json
+{
+"name": "주차장2",
+"location": "서울시 서초구",
+"totalSpaces": 120
+}
+\```
+
+응답:
+\```json
+{
+"id": "2",
+"name": "주차장2",
+"location": "서울시 서초구",
+"totalSpaces": 120,
+"availableSpaces": 120
+}
+\```
+
+\## 에러 처리
+
+주어진 요구 사항을 만족하지 않거나 예상하지 못한 오류가 발생할 경우, 에러 메시지와 함께 적절한 HTTP 상태 코드가 반환됩니다.
