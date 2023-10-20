@@ -8,9 +8,9 @@ import {
   Post,
 } from '@nestjs/common';
 import { ParkingLotService } from '../services';
-import { ParkingLot } from '../entities/parking-lot.entity';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ParkingLotRequest } from '../types/requests';
+import { ParkingLotMetaResponse } from '../types/responses';
 @Controller('v1/parking')
 @ApiTags('주자장 관리 API')
 export class ParkingLotController {
@@ -24,9 +24,9 @@ export class ParkingLotController {
   })
   @ApiCreatedResponse({
     description: '주차장의 리스트를 조회한다.',
-    type: [ParkingLot],
+    type: [ParkingLotMetaResponse],
   })
-  getParkingLots(): Promise<ParkingLot[]> {
+  getParkingLots(): Promise<ParkingLotMetaResponse[]> {
     return this.parkingLotService.getParkingLots();
   }
 
@@ -38,9 +38,9 @@ export class ParkingLotController {
   })
   @ApiCreatedResponse({
     description: '주차장의 ID로 주차장을 조회한다.',
-    type: ParkingLot,
+    type: ParkingLotMetaResponse,
   })
-  getParkingLot(@Param('id') id: string): Promise<ParkingLot> {
+  getParkingLot(@Param('id') id: string): Promise<ParkingLotMetaResponse> {
     return this.parkingLotService.getParkingLotById(id);
   }
 
@@ -52,12 +52,12 @@ export class ParkingLotController {
   })
   @ApiCreatedResponse({
     description: '주차장 정보를 기반으로 주차장 생성한다.',
-    type: ParkingLot,
+    type: ParkingLotMetaResponse,
   })
   async createParkingLot(
     @Body('parkingLot')
     parkingLot: ParkingLotRequest,
-  ): Promise<ParkingLot> {
+  ): Promise<ParkingLotMetaResponse> {
     return await this.parkingLotService.saveParkingLot(parkingLot);
   }
 }

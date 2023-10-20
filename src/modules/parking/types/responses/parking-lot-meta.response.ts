@@ -1,9 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
-import { ParkingSpaceRequest } from './parking-space.request';
+import { ParkingSpace } from '../../entities/parking-space.entity';
+import {
+  IsArray,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
+import { ParkingSpaceMetaResponse } from './parking-space-meta.response';
 import { Type } from 'class-transformer';
 
-export class ParkingLotRequest {
+export class ParkingLotMetaResponse {
+  @ApiProperty({ description: '주차장의 고유 ID', format: 'uuid' })
+  @IsUUID()
+  id: string;
+
   @ApiProperty({ description: '주차장 이름' })
   @IsString()
   name: string;
@@ -23,11 +34,11 @@ export class ParkingLotRequest {
 
   @ApiProperty({
     description: '주차장의 주차 공간 목록',
-    type: () => [ParkingSpaceRequest],
+    type: () => [ParkingSpaceMetaResponse],
     required: false,
   })
   @IsOptional()
   @IsArray()
-  @Type(() => ParkingSpaceRequest)
-  spaces?: ParkingSpaceRequest[];
+  @Type(() => ParkingSpaceMetaResponse)
+  spaces?: ParkingSpaceMetaResponse[];
 }
