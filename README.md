@@ -21,7 +21,7 @@ git clone [Your-Repository-URL]
 
 ```bash
 cd [Your-Project-Directory]
-npm install
+yarn install
 ```
 
 ### 환경 설정 파일 수정하기
@@ -31,7 +31,7 @@ npm install
 ### 프로젝트 실행하기
 
 ```bash
-npm run start
+yarn start
 ```
 
 ## 주요 기능
