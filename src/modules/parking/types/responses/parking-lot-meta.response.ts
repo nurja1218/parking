@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 import { ParkingSpaceMetaResponse } from './parking-space-meta.response';
 import { Type } from 'class-transformer';
+import { ParkingLot } from '../../entities/parking-lot.entity';
 
 export class ParkingLotMetaResponse {
   @ApiProperty({ description: '주차장의 고유 ID', format: 'uuid' })
@@ -41,4 +42,15 @@ export class ParkingLotMetaResponse {
   @IsArray()
   @Type(() => ParkingSpaceMetaResponse)
   spaces?: ParkingSpaceMetaResponse[];
+
+  constructor(parkingLot: ParkingLot) {
+    this.id = parkingLot.id;
+    this.name = parkingLot.name;
+    this.location = parkingLot.location;
+    this.totalSpaces = parkingLot.totalSpaces;
+    this.availableSpaces = parkingLot.availableSpaces;
+    this.spaces = parkingLot.spaces.map(
+      (space) => new ParkingSpaceMetaResponse(space),
+    );
+  }
 }

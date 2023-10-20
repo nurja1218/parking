@@ -14,7 +14,7 @@ import { ParkingModule } from './modules/parking/parking.module';
     }),
     TypeOrmModule.forRootAsync({
       useFactory: async () => {
-        if (process.env.NODE_ENV === 'local' && !+process.env.DEBUG_PROD) {
+        if (process.env.NODE_ENV === 'local') {
           const options = await connectionOptions(process.env);
           return {
             ...options,

@@ -54,7 +54,7 @@ export class ParkingLotController {
     description: '주차장 정보를 기반으로 주차장 생성한다.',
     type: ParkingLotMetaResponse,
   })
-  async createParkingLot(
+  async saveParkingLot(
     @Body('parkingLot')
     parkingLot: ParkingLotRequest,
   ): Promise<ParkingLotMetaResponse> {

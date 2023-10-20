@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsString, IsUUID } from 'class-validator';
 import { ParkingLotMetaResponse } from './parking-lot-meta.response';
 import { VehicleMetaResponse } from './vehicle-meta.response';
+import { ParkingSpace } from '../../entities/parking-space.entity';
 
 export class ParkingSpaceMetaResponse {
   @ApiProperty({ description: '주차 공간의 고유 ID', format: 'uuid' })
@@ -28,4 +29,11 @@ export class ParkingSpaceMetaResponse {
     required: false,
   })
   vehicle?: VehicleMetaResponse;
+
+  constructor(parkingSpace: ParkingSpace) {
+    this.id = parkingSpace.id;
+    this.isOccupied = parkingSpace.isOccupied;
+    this.number = parkingSpace.number;
+    this.parkingLot = new ParkingLotMetaResponse(parkingSpace.parkingLot);
+  }
 }
