@@ -15,7 +15,7 @@ export class ParkingLotRequest {
   @IsNumber()
   totalSpaces: number;
 
-  @ApiProperty({ description: '사용 가능한 주차 공간 수' })
+  @ApiProperty({ description: '사용 가능한 주차 공간 수', required: false })
   @IsOptional()
   @IsNumber()
   availableSpaces?: number;
