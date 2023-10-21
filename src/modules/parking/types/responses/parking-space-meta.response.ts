@@ -11,7 +11,7 @@ export class ParkingSpaceMetaResponse {
 
   @ApiProperty({ description: '주차 구역 이름' })
   @IsString()
-  number: string;
+  name: string;
 
   @ApiProperty({ description: '사용여부', default: false })
   @IsBoolean()
@@ -30,10 +30,12 @@ export class ParkingSpaceMetaResponse {
   })
   vehicle?: VehicleMetaResponse;
 
-  constructor(parkingSpace: ParkingSpace) {
-    this.id = parkingSpace.id;
-    this.isOccupied = parkingSpace.isOccupied;
-    this.number = parkingSpace.number;
-    this.parkingLot = new ParkingLotMetaResponse(parkingSpace.parkingLot);
+  constructor({ id, isOccupied, name, parkingLot }: ParkingSpace) {
+    this.id = id;
+    this.isOccupied = isOccupied;
+    this.name = name;
+    if (!!parkingLot) {
+      this.parkingLot = new ParkingLotMetaResponse(parkingLot);
+    }
   }
 }

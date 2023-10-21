@@ -45,6 +45,7 @@ yarn start
 - **GET** `/v1/parking`: 모든 주차장 정보 조회
 - **GET** `/v1/parking/:id`: 특정 주차장 상세 정보 조회
 - **POST** `/v1/parking`: 주차장 생성
+  ...
 
 ## 응답 예시
 

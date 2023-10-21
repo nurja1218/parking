@@ -1,9 +1,37 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
-import { ParkingSpaceRequest } from './parking-space.request';
+import {
+  IsArray,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
-export class ParkingLotRequest {
+class ParkingSpace {
+  @ApiProperty({
+    description: '주차장의 주차 공간 구역',
+  })
+  @IsString()
+  section: string;
+
+  @ApiProperty({
+    description: '주차장의 주차 공간 번호',
+  })
+  @IsNumber()
+  number: number;
+}
+
+export class ParkingLotSaveRequest {
+  @ApiProperty({
+    description: '주차장의 고유 ID',
+    format: 'uuid',
+    required: false,
+  })
+  @IsUUID()
+  @IsOptional()
+  id?: string;
+
   @ApiProperty({ description: '주차장 이름' })
   @IsString()
   name: string;
@@ -23,11 +51,11 @@ export class ParkingLotRequest {
 
   @ApiProperty({
     description: '주차장의 주차 공간 목록',
-    type: () => [ParkingSpaceRequest],
+    type: () => [ParkingSpace],
     required: false,
   })
   @IsOptional()
   @IsArray()
-  @Type(() => ParkingSpaceRequest)
-  spaces?: ParkingSpaceRequest[];
+  @Type(() => ParkingSpace)
+  spaces?: ParkingSpace[];
 }

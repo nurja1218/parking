@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ParkingLotService } from '../services';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { ParkingLotRequest } from '../types/requests';
+import { ParkingLotSaveRequest } from '../types/requests';
 import { ParkingLotMetaResponse } from '../types/responses';
 @Controller('v1/parking')
 @ApiTags('주자장 관리 API')
@@ -44,7 +44,7 @@ export class ParkingLotController {
     return this.parkingLotService.getParkingLotById(id);
   }
 
-  @Post()
+  @Post('create')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: '주차장 생성 API',
@@ -56,7 +56,7 @@ export class ParkingLotController {
   })
   async saveParkingLot(
     @Body('parkingLot')
-    parkingLot: ParkingLotRequest,
+    parkingLot: ParkingLotSaveRequest,
   ): Promise<ParkingLotMetaResponse> {
     return await this.parkingLotService.saveParkingLot(parkingLot);
   }

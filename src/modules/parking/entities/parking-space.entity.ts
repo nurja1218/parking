@@ -27,9 +27,9 @@ export class ParkingSpace extends BaseEntity {
   id: string;
 
   @Column()
-  @ApiProperty({ description: '주차 구역 번호' })
+  @ApiProperty({ description: '주차 구역 이름' })
   @IsString()
-  number: string;
+  name: string;
 
   @Column()
   @ApiProperty({ description: '주차 여부' })

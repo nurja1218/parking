@@ -43,14 +43,20 @@ export class ParkingLotMetaResponse {
   @Type(() => ParkingSpaceMetaResponse)
   spaces?: ParkingSpaceMetaResponse[];
 
-  constructor(parkingLot: ParkingLot) {
-    this.id = parkingLot.id;
-    this.name = parkingLot.name;
-    this.location = parkingLot.location;
-    this.totalSpaces = parkingLot.totalSpaces;
-    this.availableSpaces = parkingLot.availableSpaces;
-    this.spaces = parkingLot.spaces.map(
-      (space) => new ParkingSpaceMetaResponse(space),
-    );
+  constructor({
+    id,
+    name,
+    location,
+    totalSpaces,
+    availableSpaces,
+    spaces,
+  }: ParkingLot) {
+    this.id = id;
+    this.name = name;
+    this.location = location;
+    this.totalSpaces = totalSpaces;
+    this.availableSpaces = availableSpaces;
+
+    this.spaces = spaces.map((space) => new ParkingSpaceMetaResponse(space));
   }
 }

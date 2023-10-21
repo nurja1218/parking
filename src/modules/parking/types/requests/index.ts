@@ -1,2 +1,2 @@
-export * from './parking-lot.request';
-export * from './parking-space.request';
+export * from './parking-lot-save.request';
+export * from './parking-space-save.request';
